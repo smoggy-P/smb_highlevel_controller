@@ -121,9 +121,11 @@ include_directories(
 )
 
 ## Declare a C++ library
- add_library(smb_highlevel_controller
-   src/listener_node.cpp
- )
+ #add_library(smb_highlevel_controller
+ # src/listener_node.cpp
+ # include/p_controller.h
+ #)
+ #add_library(listener include/p_controller.h src/p_controller.cpp)
 
 ## Add cmake target dependencies of the library
 ## as an example, code may need to be generated before libraries
@@ -206,5 +208,6 @@ include_directories(
 # catkin_add_nosetests(test)
 
 # add_dependencies(listener smb_highlevel_controller_generate_messages_cpp)
-add_executable(listener src/listener_node.cpp)
+add_executable(listener src/listener_node.cpp src/p_controller.cpp)
+add_dependencies(listener ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 target_link_libraries(listener ${catkin_LIBRARIES})
