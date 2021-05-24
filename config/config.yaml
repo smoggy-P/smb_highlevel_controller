@@ -1,3 +1,4 @@
 topic: scan
 queue_size: 10
 Kp: 0.1
+speed: 0.1

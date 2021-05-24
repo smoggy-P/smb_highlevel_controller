@@ -11,7 +11,6 @@ int main(int argc, char** argv)
   int queue_size;
   double p;
   p_controller controller;
-  controller.output.linear.x=0.5;
 
   if(!nodeHandle.getParam("topic", topic)){
     ROS_ERROR("COULD NOT FIND TOPIC PARAMETER!");
@@ -22,6 +21,9 @@ int main(int argc, char** argv)
   if(!nodeHandle.getParam("Kp", p)){
     ROS_ERROR("COULD NOT FIND Kp PARAMETER!");
   }
+  if(!nodeHandle.getParam("speed", controller.output.linear.x)){
+    ROS_ERROR("COULD NOT FIND speed PARAMETER!");
+  }
 
 
   ros::Subscriber my_sub = nodeHandle.subscribe("/"+topic, queue_size, &p_controller::callback, &controller);
@@ -31,7 +33,9 @@ int main(int argc, char** argv)
   while(nodeHandle.ok()){
     ros::spinOnce();
     controller.calculate(p);
-    controller.output.linear.x=0.5;
+    if(!nodeHandle.getParam("speed", controller.output.linear.x)){
+      ROS_ERROR("COULD NOT FIND speed PARAMETER!");
+    }
     my_pub.publish(controller.output);
     delay.sleep();
   }
