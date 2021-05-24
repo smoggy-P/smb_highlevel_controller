@@ -12,6 +12,6 @@
     <rosparam command="load" file="$(find smb_highlevel_controller)/config/config.yaml" />
   </node>
 
-  <node name="rviz" pkg="rviz" type="rviz " args="-d $(find smb_highlevel_controller)/rviz/config.rviz" />
+  <node name="rviz" pkg="rviz" type="rviz" args="-d $(find smb_highlevel_controller)/rviz/config.rviz" />
 
 </launch>
