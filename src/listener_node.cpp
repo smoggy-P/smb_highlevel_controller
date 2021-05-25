@@ -21,10 +21,6 @@ int main(int argc, char** argv)
   if(!nodeHandle.getParam("Kp", p)){
     ROS_ERROR("COULD NOT FIND Kp PARAMETER!");
   }
-  if(!nodeHandle.getParam("speed", controller.output.linear.x)){
-    ROS_ERROR("COULD NOT FIND speed PARAMETER!");
-  }
-
 
   ros::Subscriber my_sub = nodeHandle.subscribe("/"+topic, queue_size, &p_controller::callback, &controller);
   ros::Publisher my_pub = nodeHandle.advertise<geometry_msgs::Twist>("/cmd_vel", 1000);
